@@ -533,7 +533,7 @@ class Diffusion_TS_ours(nn.Module):
             reg_weight=None,
             **kwargs
     ):
-        super(Diffusion_TS, self).__init__()
+        super(Diffusion_TS_ours, self).__init__()
 
         self.eta, self.use_ff = eta, use_ff
         self.seq_length = seq_length

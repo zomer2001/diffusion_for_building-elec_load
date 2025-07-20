@@ -53,9 +53,9 @@ solver:
     decay: 0.995
     update_interval: 10
   gradient_accumulate_every: 2
-  max_epochs: 10000
+  max_epochs: 8000
   results_folder: CK/ours/85/train/Bobcat_warehouse_Charlie_start2000_720
-  save_cycle: 2000
+  save_cycle: 8000
   scheduler:
     params:
       factor: 0.5
