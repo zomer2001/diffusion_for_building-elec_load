@@ -9,7 +9,7 @@ sample_config_path = 'sample.yaml'
 results_base_dir = 'CK/ours'
 output_base_dir = 'OUTPUT/ours_gen'
 sparsity_rates = [0.9,0.8,0.7,0.5,0.4,0.3,0.2]
-subfolders = ['2160']
+subfolders = ['720','4320']
 
 os.makedirs(train_data_dir, exist_ok=True)
 os.makedirs(results_base_dir, exist_ok=True)

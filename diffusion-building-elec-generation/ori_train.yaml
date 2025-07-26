@@ -28,7 +28,7 @@ dataloader:
       save2npy: true
       seed: 123
       window: 24
-    target: Utils.Data_utils.real_datasets.CustomDataset
+    target: Utils.Data_utils.real_datasets.CustomDatasetOURS
 model:
   params:
     attn_pd: 0.0

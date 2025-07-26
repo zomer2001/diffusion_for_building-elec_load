@@ -20,7 +20,7 @@ dataloader:
     target: Utils.Data_utils.real_datasets.CustomDataset
   train_dataset:
     params:
-      data_root: /tmp/Diffusion-TS/Data/train_data/90/train/Bobcat_warehouse_Charlie_start0_720.csv
+      data_root: D:\MYsource\diffusion_for_building-elec_load\diffusion-building-elec-generation\Data\train_data_0725\90\train\Bobcat_warehouse_Charlie_start6000_720.csv
       name: energy
       neg_one_to_one: true
       period: train
@@ -54,7 +54,7 @@ solver:
     update_interval: 10
   gradient_accumulate_every: 2
   max_epochs: 20000
-  results_folder: CK/diffts/90/train/Bobcat_warehouse_Charlie_start0_720
+  results_folder: CK/diffts\90\train\Bobcat_warehouse_Charlie_start6000_720
   save_cycle: 2000
   scheduler:
     params:

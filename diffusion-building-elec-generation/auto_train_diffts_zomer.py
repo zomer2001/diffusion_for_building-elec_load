@@ -3,13 +3,13 @@ import pandas as pd
 import yaml
 
 # 定义路径和参数
-train_data_dir = 'Data/train_data'
+train_data_dir = 'Data/train_data_0725'
 config_file_path = 'ori_train_diffts_zomer.yaml'
 sample_config_path = 'sample.yaml'
 results_base_dir = 'CK/diffts'
 output_base_dir = 'OUTPUT/diffts_zomer_gen'
 sparsity_rates = [0.9,0.8,0.7,0.5,0.4,0.3,0.2]
-subfolders = ['2160']
+subfolders = ['720','2160','4320']
 
 os.makedirs(train_data_dir, exist_ok=True)
 os.makedirs(results_base_dir, exist_ok=True)
@@ -81,7 +81,7 @@ def start_training(config, data_root, results_folder, sparsity, dataset_name, sp
 
 def train_model(dataset_name, sparsity_percentage):
     name = f"{dataset_name}_{sparsity_percentage}"
-    command = f"python main.py --name {name} --config_file {config_file_path} --gpu 0 --train"
+    command = f"python main.py --name diffzomer --config_file {config_file_path} --gpu 0 --train"
     os.system(command)
     print(f"训练命令已执行：{command}")
 
