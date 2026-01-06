@@ -3,7 +3,7 @@ import pandas as pd
 import yaml
 
 # 定义路径和参数
-train_data_dir = 'Data/train_data'
+train_data_dir = 'Data/train_data_0725'
 config_file_path = 'ori_train.yaml'
 sample_config_path = 'sample.yaml'
 results_base_dir = 'CK/ours'
