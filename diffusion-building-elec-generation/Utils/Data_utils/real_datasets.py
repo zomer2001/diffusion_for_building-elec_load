@@ -300,55 +300,106 @@ class CustomDatasetOURS(Dataset):
         x = data
         return self.scaler.inverse_transform(x)
 
+    # @staticmethod
+    # def divide(data, ratio, seed=2023):
+    #     size = data.shape[0]
+    #
+    #     # Store the state of the RNG to restore later.
+    #     st0 = np.random.get_state()
+    #     np.random.seed(seed)
+    #
+    #     if ratio == 0.2:
+    #         # Divide into 2 parts, take the first (odd-indexed) part
+    #         num_splits = 2
+    #         regular_train_num = size // 2
+    #         id_rdm = np.arange(size)
+    #         regular_train_id = id_rdm[:regular_train_num]
+    #         irregular_train_id = id_rdm[regular_train_num:]
+    #     elif ratio == 0.4:
+    #         # Divide into 4 parts, take the 1st, 3rd parts (odd-indexed)
+    #         num_splits = 4
+    #         split_size = size // 4
+    #         id_rdm = np.arange(size)
+    #         regular_train_id = id_rdm[:split_size]  # 1st part
+    #         regular_train_id = np.concatenate([regular_train_id, id_rdm[2 * split_size: 3 * split_size]])  # 3rd part
+    #         irregular_train_id = np.setdiff1d(id_rdm, regular_train_id)  # Remaining parts: 2nd, 4th
+    #     elif ratio == 0.8:
+    #         # Divide into 8 parts, take the 1st, 3rd, 5th, 7th parts (odd-indexed)
+    #         num_splits = 8
+    #         split_size = size // 8
+    #         id_rdm = np.arange(size)
+    #         regular_train_id = id_rdm[:split_size]  # 1st part
+    #         regular_train_id = np.concatenate([regular_train_id, id_rdm[2 * split_size: 4 * split_size],
+    #                                            id_rdm[4 * split_size: 5 * split_size],
+    #                                            id_rdm[6 * split_size: 8 * split_size]])  # 3rd, 5th, 7th parts
+    #         irregular_train_id = np.setdiff1d(id_rdm, regular_train_id)  # Remaining parts: 2nd, 4th, 6th, 8th
+    #     else:
+    #         # For ratio <= 1, we simply split as before
+    #         regular_train_num = int(np.ceil(size * (ratio+0.4*(1-ratio))))
+    #         id_rdm = np.arange(size)
+    #         regular_train_id = id_rdm[:regular_train_num]
+    #         irregular_train_id = id_rdm[regular_train_num:]
+    #
+    #     # Split data based on the calculated indices
+    #     regular_data = data[regular_train_id, :]
+    #     irregular_data = data[irregular_train_id, :]
+    #
+    #     # Restore RNG
+    #     np.random.set_state(st0)
+    #
+    #     return regular_data, irregular_data
     @staticmethod
     def divide(data, ratio, seed=2023):
         size = data.shape[0]
 
-        # Store the state of the RNG to restore later.
+        # 1. 映射比例 (Mapping Logic)
+        # 根据你的需求：0.9->0.9, 0.7->0.8, 0.5->0.65, 0.3->0.5
+        # 以及：0.8->0.6随机, 0.4->0.55随机, 0.2->0.5随机
+        if ratio == 0.9:
+            target_ratio = 0.9
+        elif ratio == 0.8:
+            target_ratio = 0.6
+        elif ratio == 0.7:
+            target_ratio = 0.8
+        elif ratio == 0.5:
+            target_ratio = 0.65
+        elif ratio == 0.4:
+            target_ratio = 0.55
+        elif ratio == 0.3:
+            target_ratio = 0.5
+        elif ratio == 0.2:
+            target_ratio = 0.5
+        else:
+            # 默认处理其他比例
+            target_ratio = ratio
+
+        # 2. 执行随机抽取
         st0 = np.random.get_state()
         np.random.seed(seed)
 
-        if ratio == 0.2:
-            # Divide into 2 parts, take the first (odd-indexed) part
-            num_splits = 2
-            regular_train_num = size // 2
-            id_rdm = np.arange(size)
-            regular_train_id = id_rdm[:regular_train_num]
-            irregular_train_id = id_rdm[regular_train_num:]
-        elif ratio == 0.4:
-            # Divide into 4 parts, take the 1st, 3rd parts (odd-indexed)
-            num_splits = 4
-            split_size = size // 4
-            id_rdm = np.arange(size)
-            regular_train_id = id_rdm[:split_size]  # 1st part
-            regular_train_id = np.concatenate([regular_train_id, id_rdm[2 * split_size: 3 * split_size]])  # 3rd part
-            irregular_train_id = np.setdiff1d(id_rdm, regular_train_id)  # Remaining parts: 2nd, 4th
-        elif ratio == 0.8:
-            # Divide into 8 parts, take the 1st, 3rd, 5th, 7th parts (odd-indexed)
-            num_splits = 8
-            split_size = size // 8
-            id_rdm = np.arange(size)
-            regular_train_id = id_rdm[:split_size]  # 1st part
-            regular_train_id = np.concatenate([regular_train_id, id_rdm[2 * split_size: 4 * split_size],
-                                               id_rdm[4 * split_size: 5 * split_size],
-                                               id_rdm[6 * split_size: 8 * split_size]])  # 3rd, 5th, 7th parts
-            irregular_train_id = np.setdiff1d(id_rdm, regular_train_id)  # Remaining parts: 2nd, 4th, 6th, 8th
-        else:
-            # For ratio <= 1, we simply split as before
-            regular_train_num = int(np.ceil(size * (ratio+0.4*(1-ratio))))
-            id_rdm = np.arange(size)
-            regular_train_id = id_rdm[:regular_train_num]
-            irregular_train_id = id_rdm[regular_train_num:]
+        # 生成打乱的索引
+        indices = np.arange(size)
+        np.random.shuffle(indices)
 
-        # Split data based on the calculated indices
+        # 计算训练集数量
+        train_num = int(size * target_ratio)
+
+        # 分配索引
+        regular_train_id = indices[:train_num]
+        irregular_train_id = indices[train_num:]
+
+        # 恢复 RNG 状态
+        np.random.set_state(st0)
+
+        # 3. 提取数据
+        # 注意：为了保持时间序列的相对顺序（可选），可以对索引进行排序
+        # regular_train_id.sort()
+        # irregular_train_id.sort()
+
         regular_data = data[regular_train_id, :]
         irregular_data = data[irregular_train_id, :]
 
-        # Restore RNG
-        np.random.set_state(st0)
-
         return regular_data, irregular_data
-
     @staticmethod
     def read_data(filepath, name=''):
         """Reads a single .csv
