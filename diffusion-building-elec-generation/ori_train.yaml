@@ -17,7 +17,7 @@ dataloader:
       window: 24
     sampling_steps: 250
     step_size: 0.05
-    target: Utils.Data_utils.real_datasets.CustomDatasetOURS
+    target: Utils.Data_utils.real_datasets.CustomDataset
   train_dataset:
     params:
       data_root: /cfs/cfs-54d255b38/zomeryang/20250421_193157/Diffusion-TS/Data/train_data/85/train/Bobcat_warehouse_Charlie_start2000_720.csv
@@ -28,7 +28,7 @@ dataloader:
       save2npy: true
       seed: 123
       window: 24
-    target: Utils.Data_utils.real_datasets.CustomDatasetOURS
+    target: Utils.Data_utils.real_datasets.CustomDataset
 model:
   params:
     attn_pd: 0.0
@@ -53,9 +53,9 @@ solver:
     decay: 0.995
     update_interval: 10
   gradient_accumulate_every: 2
-  max_epochs: 8000
+  max_epochs: 5000
   results_folder: CK/ours/85/train/Bobcat_warehouse_Charlie_start2000_720
-  save_cycle: 8000
+  save_cycle: 5000
   scheduler:
     params:
       factor: 0.5

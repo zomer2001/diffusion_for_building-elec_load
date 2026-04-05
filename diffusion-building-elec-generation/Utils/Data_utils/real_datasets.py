@@ -68,6 +68,7 @@ class CustomDataset(Dataset):
 
         train_data, test_data = self.divide(x, proportion, seed)
 
+        #train_data, test_data = self.divide2(x, proportion)
         if self.save2npy:
             if 1 - proportion > 0:
                 np.save(os.path.join(self.dir, f"{self.name}_ground_truth_{self.window}_test.npy"), self.unnormalize(test_data))
@@ -155,6 +156,34 @@ class CustomDataset(Dataset):
 
         return regular_data, irregular_data
 
+    @staticmethod
+    def divide2(self, x, proportion):
+        """
+        按时间顺序划分数据（无随机性）
+
+        参数：
+            x: 时间序列数据 (N, ...)
+            proportion: 训练集使用的“月份数”（例如 3、6、9、12）
+
+        返回：
+            train_data, test_data
+        """
+
+        # 每个月的数据量：24小时 × 30天
+        month_len = 24 * 30  # 720
+
+        # 训练数据长度
+        train_len = int(month_len * proportion)
+
+        # 边界保护
+        if train_len > len(x):
+            raise ValueError(f"训练数据长度 {train_len} 超过总数据长度 {len(x)}")
+
+        # 按时间顺序切分
+        train_data = x[:train_len]
+        test_data = x[train_len:]
+
+        return train_data, test_data
 
 
     @staticmethod
@@ -256,7 +285,7 @@ class CustomDatasetOURS(Dataset):
             end = i + self.window
             x[i, :, :] = data[start:end, :]
 
-        train_data, test_data = self.divide(x, proportion, seed)
+        train_data, test_data = self.divide2(x, proportion, seed)
 
         if self.save2npy:
             if 1 - proportion > 0:
@@ -400,6 +429,35 @@ class CustomDatasetOURS(Dataset):
         irregular_data = data[irregular_train_id, :]
 
         return regular_data, irregular_data
+
+    @staticmethod
+    def divide2(self, x, proportion):
+        """
+        按时间顺序划分数据（无随机性）
+
+        参数：
+            x: 时间序列数据 (N, ...)
+            proportion: 训练集使用的“月份数”（例如 3、6、9、12）
+
+        返回：
+            train_data, test_data
+        """
+
+        # 每个月的数据量：24小时 × 30天
+        month_len = 24 * 30  # 720
+
+        # 训练数据长度
+        train_len = int(month_len * proportion)
+
+        # 边界保护
+        if train_len > len(x):
+            raise ValueError(f"训练数据长度 {train_len} 超过总数据长度 {len(x)}")
+
+        # 按时间顺序切分
+        train_data = x[:train_len]
+        test_data = x[train_len:]
+
+        return train_data, test_data
     @staticmethod
     def read_data(filepath, name=''):
         """Reads a single .csv

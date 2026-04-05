@@ -3,13 +3,13 @@ import pandas as pd
 import yaml
 
 # 定义路径和参数
-train_data_dir = 'Data/train_data_0725'
+train_data_dir = 'Data/train_data_260425'
 config_file_path = 'ori_train.yaml'
 sample_config_path = 'sample.yaml'
-results_base_dir = 'CK/ours'
-output_base_dir = 'OUTPUT/ours_gen'
-sparsity_rates = [0.9,0.8,0.7,0.5,0.4,0.3,0.2]
-subfolders = ['2160']
+results_base_dir = 'CK/ours2'
+output_base_dir = 'OUTPUT/ours2_gen'
+sparsity_rates = [0.25,0.4,0.08]
+subfolders = ['405']
 
 os.makedirs(train_data_dir, exist_ok=True)
 os.makedirs(results_base_dir, exist_ok=True)
