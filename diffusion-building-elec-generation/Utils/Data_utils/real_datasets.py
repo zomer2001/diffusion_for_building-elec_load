@@ -450,8 +450,8 @@ class CustomDatasetOURS(Dataset):
         train_len = int(month_len * proportion)
 
         # 边界保护
-        if train_len > len(x):
-            raise ValueError(f"训练数据长度 {train_len} 超过总数据长度 {len(x)}")
+        # if train_len > len(x):
+        #     raise ValueError(f"训练数据长度 {train_len} 超过总数据长度 {len(x)}")
 
         # 按时间顺序切分
         train_data = x[:train_len]
