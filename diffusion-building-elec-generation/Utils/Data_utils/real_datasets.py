@@ -60,6 +60,7 @@ class CustomDataset(Dataset):
         self.sample_num = self.samples.shape[0]
 
     def __getsamples(self, data, proportion, seed):
+        proportion = proportion*10
         x = np.zeros((self.sample_num_total, self.window, self.var_num))
         for i in range(self.sample_num_total):
             start = i
@@ -285,7 +286,7 @@ class CustomDatasetOURS(Dataset):
             end = i + self.window
             x[i, :, :] = data[start:end, :]
 
-        train_data, test_data = self.divide2(x, proportion, seed)
+        train_data, test_data = self.divide2(x, proportion)
 
         if self.save2npy:
             if 1 - proportion > 0:
@@ -454,6 +455,7 @@ class CustomDatasetOURS(Dataset):
         #     raise ValueError(f"训练数据长度 {train_len} 超过总数据长度 {len(x)}")
 
         # 按时间顺序切分
+        print(type(x))
         train_data = x[:train_len]
         test_data = x[train_len:]
 
