@@ -432,7 +432,7 @@ class CustomDatasetOURS(Dataset):
         return regular_data, irregular_data
 
     @staticmethod
-    def divide2(self, x, proportion):
+    def divide2(x, proportion):
         """
         按时间顺序划分数据（无随机性）
 
