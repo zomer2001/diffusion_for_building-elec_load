@@ -3,11 +3,11 @@ import pandas as pd
 import yaml
 
 # 定义路径和参数
-train_data_dir = 'Data/train_data_260425'
-config_file_path = 'ori_train.yaml'
-sample_config_path = 'sample.yaml'
-results_base_dir = 'CK/ours2'
-output_base_dir = 'OUTPUT/ours2_gen'
+train_data_dir = r'Data\train_data_260425'
+config_file_path = r'ori_train.yaml'
+sample_config_path = r'sample.yaml'
+results_base_dir = r'CK\ours2'
+output_base_dir = r'OUTPUT\ours2_gen'
 sparsity_rates = [0.25,0.4,0.08]
 subfolders = ['405']
 
