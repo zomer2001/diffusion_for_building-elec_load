@@ -295,7 +295,7 @@ class CustomDatasetOURS(Dataset):
             np.save(os.path.join(self.dir, f"{self.name}_ground_truth_{self.window}_train.npy"),
                     self.unnormalize(train_data))
             if self.auto_norm:
-                
+
                 np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_test.npy"),
                             unnormalize_to_zero_to_one(test_data))
                 np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_train.npy"),
