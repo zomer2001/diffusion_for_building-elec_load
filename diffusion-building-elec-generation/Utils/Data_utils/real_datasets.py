@@ -301,8 +301,8 @@ class CustomDatasetOURS(Dataset):
                 np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_train.npy"),
                         unnormalize_to_zero_to_one(train_data))
             else:
-                if 1 - proportion > 0:
-                    np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_test.npy"), test_data)
+
+                np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_test.npy"), test_data)
                 np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_train.npy"), train_data)
 
         return train_data, test_data

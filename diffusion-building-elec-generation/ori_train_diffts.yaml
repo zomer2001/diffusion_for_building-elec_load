@@ -10,7 +10,7 @@ dataloader:
       name: energy
       neg_one_to_one: true
       period: test
-      proportion: 0.9
+      proportion: 0.3
       save2npy: true
       seed: 123
       style: separate
@@ -24,7 +24,7 @@ dataloader:
       name: energy
       neg_one_to_one: true
       period: train
-      proportion: 3
+      proportion: 0.3
       save2npy: true
       seed: 123
       window: 24
