@@ -8,7 +8,7 @@ config_file_path = r'ori_train_diffts.yaml'
 sample_config_path = r'sample.yaml'
 results_base_dir = r'CK\CDDM2'
 output_base_dir = r'OUTPUT\CDDM2_gen'
-sparsity_rates = [3]
+sparsity_rates = [3,1,5]
 subfolders = ['405']
 
 os.makedirs(train_data_dir, exist_ok=True)
