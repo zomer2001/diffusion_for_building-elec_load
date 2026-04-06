@@ -289,14 +289,14 @@ class CustomDatasetOURS(Dataset):
         train_data, test_data = self.divide2(x, proportion)
 
         if self.save2npy:
-            if 1 - proportion > 0:
-                np.save(os.path.join(self.dir, f"{self.name}_ground_truth_{self.window}_test.npy"),
+
+            np.save(os.path.join(self.dir, f"{self.name}_ground_truth_{self.window}_test.npy"),
                         self.unnormalize(test_data))
             np.save(os.path.join(self.dir, f"{self.name}_ground_truth_{self.window}_train.npy"),
                     self.unnormalize(train_data))
             if self.auto_norm:
-                if 1 - proportion > 0:
-                    np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_test.npy"),
+                
+                np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_test.npy"),
                             unnormalize_to_zero_to_one(test_data))
                 np.save(os.path.join(self.dir, f"{self.name}_norm_truth_{self.window}_train.npy"),
                         unnormalize_to_zero_to_one(train_data))
