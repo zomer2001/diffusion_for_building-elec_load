@@ -110,7 +110,7 @@ class CustomDataset(Dataset):
     
     @staticmethod
 
-    def divide(self, x, ratio, seed=None):
+    def divide(x, ratio, seed=None):
         """
         按比例随机划分数据
 
