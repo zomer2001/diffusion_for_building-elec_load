@@ -148,7 +148,7 @@ class Trainer(object):
             tic = time.time()
             self.logger.log_info('Begin to sample...')
         samples = np.empty([0, shape[0], shape[1]])
-        num_cycle = int(num // size_every) + 1
+        num_cycle = 1
 
         for _ in range(num_cycle):
             sample = self.ema.ema_model.generate_mts(batch_size=size_every, model_kwargs=model_kwargs, cond_fn=cond_fn)

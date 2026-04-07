@@ -13,6 +13,7 @@ from Utils.io_utils import load_yaml_config, seed_everything, merge_opts_to_conf
 def parse_args():
     parser = argparse.ArgumentParser(description='PyTorch Training Script')
     parser.add_argument('--name', type=str, default=None)
+    parser.add_argument('--size_every', type=int, default=None)
 
     parser.add_argument('--config_file', type=str, default=None, 
                         help='path of config file')
@@ -88,7 +89,7 @@ def main():
     else:
         trainer.load(args.milestone)
         dataset = dataloader_info['dataset']
-        samples = trainer.sample(num=len(dataset), size_every=2001, shape=[dataset.window, dataset.var_num])
+        samples = trainer.sample(num=len(dataset), size_every=args.size_every, shape=[dataset.window, dataset.var_num])
         if dataset.auto_norm:
             samples = unnormalize_to_zero_to_one(samples)
             # samples = dataset.scaler.inverse_transform(samples.reshape(-1, samples.shape[-1])).reshape(samples.shape)
