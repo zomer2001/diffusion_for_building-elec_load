@@ -7,7 +7,7 @@ train_data_dir = r'Data\train_data_260405'
 config_file_path = r'ori_train_diffts.yaml'
 sample_config_path = r'sample.yaml'
 results_base_dir = r'CK\CDDM'
-output_base_dir = r'OUTPUT\CDDM_gen_UPDATE_other_gen_data_length'
+output_base_dir = r'OUTPUT\CDDM_gen_UPDATE_same_gen_data_length'
 sparsity_rates = [3,1,5]
 subfolders = ['405']
 
@@ -99,7 +99,7 @@ def run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, ou
 
     name = f"{dataset_name}_{sparsity_percentage}"
     checkpoint_number = 1  # 可根据需要调整
-    command = f"python main.py --name {name} --size_every {int(30*24*(12-(sparsity_percentage//100)))} --config_file {sample_config_path} --gpu 0 --sample 0 --milestone {checkpoint_number} --output {output_path}"
+    command = f"python main.py --name {name} --size_every {int(sparsity_percentage *24*30//100)} --config_file {sample_config_path} --gpu 0 --sample 0 --milestone {checkpoint_number} --output {output_path}"
     #int(sparsity_percentage *24*30//100)
     os.system(command)
     print(f"采样命令已执行：{command}")
