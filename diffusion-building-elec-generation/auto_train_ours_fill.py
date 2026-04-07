@@ -8,7 +8,7 @@ config_file_path = r'ori_train.yaml'
 sample_config_path = r'sample.yaml'
 results_base_dir = r'CK\ours2'
 output_base_dir = r'OUTPUT\ours2_gen_fill'
-sparsity_rates = [0.08,0.25,0.4]
+sparsity_rates = [0.92,0.75,0.6]
 subfolders = ['405']
 
 os.makedirs(train_data_dir, exist_ok=True)
