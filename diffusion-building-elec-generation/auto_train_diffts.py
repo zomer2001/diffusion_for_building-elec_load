@@ -55,17 +55,17 @@ def generate_csv_files():
                     if not os.path.exists(results_foldertag):
                         print(f"文件夹 {results_foldertag} 不存在，开始训练。")
                         start_training(config, data_root, results_folder, sparsity, dataset_name, sparsity_percentage)
-                        #run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, output_path)
+                        run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, output_path)
                     else:
                         pt_files = [f for f in os.listdir(results_foldertag) if f.endswith('.pt')]
                         if len(pt_files) < 1:
                             print(f"{results_foldertag} 中的.pt文件少于4个，重新训练。")
                             start_training(config, data_root, results_folder, sparsity, dataset_name, sparsity_percentage)
-                            #run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, output_path)
+                            run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, output_path)
                         else:
                             if not os.path.exists(output_path):
                                 print(f"{output_path} 不存在，执行采样。")
-                                #run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, output_path)
+                                run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, output_path)
                             else:
                                 print(f"{results_foldertag} 已存在，且 {output_path} 输出已存在，跳过。")
 
