@@ -7,7 +7,7 @@ train_data_dir = r'Data\train_data_260405'
 config_file_path = r'ori_train.yaml'
 sample_config_path = r'sample.yaml'
 results_base_dir = r'CK\ours2'
-output_base_dir = r'OUTPUT\ours2_gen'
+output_base_dir = r'OUTPUT\ours2_gen_same_length'
 sparsity_rates = [0.25,0.4,0.08]
 subfolders = ['405']
 

@@ -6,8 +6,8 @@ import yaml
 train_data_dir = r'Data\train_data_260405'
 config_file_path = r'ori_train_diffts.yaml'
 sample_config_path = r'sample.yaml'
-results_base_dir = r'CK\CDDM2'
-output_base_dir = r'OUTPUT\CDDM2_gen_UPDATE'
+results_base_dir = r'CK\CDDM'
+output_base_dir = r'OUTPUT\CDDM_gen_UPDATE_same_gen_data_length'
 sparsity_rates = [3,1,5]
 subfolders = ['405']
 
