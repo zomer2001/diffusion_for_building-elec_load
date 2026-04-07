@@ -99,7 +99,7 @@ def run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, ou
 
     name = f"{dataset_name}_{sparsity_percentage}"
     checkpoint_number = 1  # 可根据需要调整
-    command = f"python main.py --name {name} --config_file {sample_config_path} --gpu 0 --sample 0 --milestone {checkpoint_number} --output {output_path}"
+    command = f"python main.py --name {name} --size_every {int(sparsity_percentage *24*365//100)} --config_file {sample_config_path} --gpu 0 --sample 0 --milestone {checkpoint_number} --output {output_path}"
     os.system(command)
     print(f"采样命令已执行：{command}")
 

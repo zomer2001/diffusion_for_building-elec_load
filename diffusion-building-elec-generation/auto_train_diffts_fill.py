@@ -8,7 +8,7 @@ config_file_path = r'ori_train_diffts.yaml'
 sample_config_path = r'sample.yaml'
 results_base_dir = r'CK\CDDM2_fill'
 output_base_dir = r'OUTPUT\CDDM2_gen_fill'
-sparsity_rates = [7,9,11]
+sparsity_rates = [11,9,7]
 subfolders = ['405']
 
 os.makedirs(train_data_dir, exist_ok=True)
@@ -99,7 +99,7 @@ def run_sampling(data_root,dataset_name, sparsity_percentage, results_folder, ou
 
     name = f"{dataset_name}_{sparsity_percentage}"
     checkpoint_number = 1  # 可根据需要调整
-    command = f"python main.py --name {name} --config_file {sample_config_path} --gpu 0 --sample 0 --milestone {checkpoint_number} --output {output_path}"
+    command = f"python main.py --name {name} --size_every {int((12-(sparsity_percentage//100)) *24*30)} --config_file {sample_config_path} --gpu 0 --sample 0 --milestone {checkpoint_number} --output {output_path}"
     os.system(command)
     print(f"采样命令已执行：{command}")
 
