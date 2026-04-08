@@ -20,11 +20,11 @@ dataloader:
     target: Utils.Data_utils.real_datasets.CustomDatasetOURS
   train_dataset:
     params:
-      data_root: D:\MYsource\diffusion_for_building-elec_load\diffusion-building-elec-generation\Data\train_data_0725\20\train\Rat_public_Alexander_start8000_4320.csv
+      data_root: D:\MYsource\diffusion_for_building-elec_load\diffusion-building-elec-generation\Data\train_data_260405\700\train\Fox_lodging_Frances.csv
       name: energy
       neg_one_to_one: true
       period: train
-      proportion: 0.3
+      proportion: 7
       save2npy: true
       seed: 123
       window: 24
@@ -54,7 +54,7 @@ solver:
     update_interval: 10
   gradient_accumulate_every: 2
   max_epochs: 5000
-  results_folder: CK/diffts\20\train\Rat_public_Alexander_start8000_4320
+  results_folder: CK\CDDM2_fill\700\train\Fox_lodging_Frances
   save_cycle: 5000
   scheduler:
     params:
